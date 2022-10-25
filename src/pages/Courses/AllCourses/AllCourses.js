@@ -1,9 +1,10 @@
 import React from 'react';
+import { Outlet } from 'react-router-dom';
 
 const AllCourses = () => {
     return (
         <div>
-            <h2>this is course content</h2>
+            <Outlet/>
         </div>
     );
 };
