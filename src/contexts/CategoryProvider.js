@@ -6,7 +6,7 @@ export const CategoryContext = createContext()
 export const CategoryProvider = ({ children}) => {
     // console.log(name);
     const [specificCourses, setSpecificCourses] = useState([])
-    const [category, setCategory] = useState('')
+    const [category, setCategory] = useState('all')
     const categoryHandler = (name) => {
         setCategory(name)
     }
@@ -15,7 +15,7 @@ export const CategoryProvider = ({ children}) => {
         fetch(`http://localhost:5000/courses/${category.toLowerCase()}`)
         .then(res => res.json())
         .then(data => {
-            console.log(data);
+            // console.log(data);
             setSpecificCourses(data)
         })
     },[category])

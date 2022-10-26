@@ -1,20 +1,24 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useState } from 'react';
-import { Outlet, useLoaderData } from 'react-router-dom';
+import { NavLink, Outlet, useLoaderData } from 'react-router-dom';
 import { CategoryContext } from '../../../contexts/CategoryProvider';
 
 
 const AllCourses = () => {
     const AllCourses = useLoaderData()
-    const [courses, setCourses] = (useState(AllCourses))
+    // const [courses, setCourses] = (useState(AllCourses))
     const { specificCourses } = useContext(CategoryContext)
     // setCourses(specificCourses)
+    // useEffect(() => {
+    //     setCourses()
+    // },[specificCourses])
+    // console.log(specificCourses, 'All courses');
     return (
         <div className="p-8 grow">
-            <h2>all courses {courses.length}</h2>
+            <h2>all courses {specificCourses.length}</h2>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 justify-center">
                 {
-                    courses.map(course => {
+                    specificCourses.map(course => {
                         const {id, courseName, category, author, video} = course;
                         return (
                             <div key={id} className="card min-w-72 bg-base-100 shadow-xl p-2 border flex flex-col justify-between">
@@ -32,7 +36,9 @@ const AllCourses = () => {
                                     <p className="font-semibold text-[12px] text-slate-600 text-right">Video: {video.quantity}</p>
                                 </div>
                                 <div className="card-actions justify-between">
-                                <button className="bg-violet-700 hover:bg-violet-600 text-white rounded-lg font-semibold px-3 py-1">See Details</button>
+                                <button className="bg-violet-700 hover:bg-violet-600 text-white rounded-lg font-semibold px-3 py-1">
+                                    <NavLink state={course} to={`/courses/${courseName.split(' ').join('-').toLowerCase()}`}>See Details</NavLink>
+                                </button>
                                 <button className="bg-violet-700 hover:bg-violet-600 text-white rounded-lg font-semibold px-3 py-1">Add to Cart</button>
                                 </div>
                             </div>

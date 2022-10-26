@@ -35,6 +35,15 @@ const CourseCategory = () => {
       </NavLink>
 
       <ul className="mt-6">
+        <li>
+          <NavLink onClick={() => categoryHandler('all')} className="flex gap-x-2 mb-2 items-center">
+          <img
+          className={`invert w-8 duration-300 ${!isOpen && 'rotate-180'}`}
+          src="https://uxwing.com/wp-content/themes/uxwing/download/web-app-development/code-icon.png"
+          alt="" />
+            <h2 className={`text-lg text-white font-bold duration-300 ${!isOpen && 'scale-0'}`}>All</h2>
+          </NavLink>
+        </li>
       {
         menus.map((menu, index) => {
           return (
