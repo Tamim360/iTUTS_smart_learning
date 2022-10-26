@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { FaCode , FaAngleRight} from "react-icons/fa";
 import js from '../../../assets/js.png'
 import node from '../../../assets/nodejs.png'
+import { CategoryContext } from "../../../contexts/CategoryProvider";
 
 const CourseCategory = () => {
   const [isOpen, setIsOpen] = useState(true)
+  const {categoryHandler} = useContext(CategoryContext)
   const menus = [
     {
       name: 'JavaScript',
@@ -17,7 +19,7 @@ const CourseCategory = () => {
     }
   ]
   return (
-    <div className={`${isOpen ? "w-72" : "w-16"} duration-300 bg-violet-700 h-screen p-4 pt-6 relative`}
+    <div className={`${isOpen ? "w-72" : "w-16"} duration-300 bg-violet-700 h-screen p-4 pt-6 sticky top-0`}
     >
 
       <FaAngleRight className={`duration-500 text-xl font-bold bg-white rounded-full absolute -right-3 top-8 border border-slate-900 ${isOpen && 'rotate-180'} cursor-pointer`}
@@ -37,7 +39,7 @@ const CourseCategory = () => {
         menus.map((menu, index) => {
           return (
             <li key={index}>
-              <NavLink className="flex gap-x-2 mb-2 items-center">
+              <NavLink onClick={() => categoryHandler(menu.name)}className="flex gap-x-2 mb-2 items-center">
               <img className="w-8 rounded-full" src={`${menu.src}`} alt="" />
               <h2 className={`text-lg text-white font-bold duration-300 ${!isOpen && 'scale-0'}`}>{menu.name}</h2>
             </NavLink>
