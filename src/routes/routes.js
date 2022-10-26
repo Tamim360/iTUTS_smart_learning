@@ -7,6 +7,7 @@ import Courses from "../pages/Courses/Courses";
 import FAQ from "../pages/FAQ/FAQ";
 import Home from "../pages/Home/Home/Home";
 import Perchase from "../pages/Perchase/Perchase";
+import Success from "../pages/Success/Success";
 
 export const router = createBrowserRouter([
     {
@@ -39,7 +40,7 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/courses/perchase',
-                element: <Perchase/>
+                element: <Perchase />
             },
             {
                 path: '/faq',
@@ -48,6 +49,10 @@ export const router = createBrowserRouter([
             {
                 path: '/blogs',
                 element: <Blogs />
+            },
+            {
+                path: '/success',
+                element: <Success />,
             }
         ]
     }

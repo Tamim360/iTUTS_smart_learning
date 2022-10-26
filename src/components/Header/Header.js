@@ -14,10 +14,10 @@ const Header = () => {
 
   return (
     <div
-      data-theme={dark ? "dark" : "light"}
+      
       className={`${
-        dark ? "text-white" : "text-slate-900"
-      } navbar bg-base-100 border-b border-slate-900/10`}
+        dark ? "text-white border-slate-500" : "text-slate-900"
+      } navbar bg-base-100 border-b border-slate-900/10 `}
     >
       <div className="flex-1">
         <Link to="/" className="btn btn-ghost normal-case text-xl font-bold"><FaCode className="mr-2"/> iTUTS</Link>
@@ -25,7 +25,7 @@ const Header = () => {
 
       {/* menu */}
       <ul
-        data-theme={dark ? "dark" : "light"}
+        
         className={`menu absolute left-0 ${
           isOpen ? "top-16" : "top-[-250px]"
         } text-center w-screen md:static md:menu-horizontal p-0 duration-150 ${

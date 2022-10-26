@@ -6,12 +6,9 @@ import CourseCategory from './CourseCategory/CourseCategory';
 
 const Courses = () => {
     const { dark } = useContext(ThemeContext)
-    const categoryHandler = name => {
-        console.log(name);
-    }
     return (
-        <div data-theme={dark ? 'dark' : 'light'} className="flex">
-            <CourseCategory categoryHandler={categoryHandler} />
+        <div className="flex">
+            <CourseCategory />
             <Outlet/>
         </div>
     );
