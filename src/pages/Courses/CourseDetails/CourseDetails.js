@@ -23,7 +23,7 @@ const CourseDetails = () => {
                 </div>
                 <p className="my-3 font-semibold">{description}</p>
                 <button className="btn btn-primary my-4 mx-auto block">
-                    <NavLink state={location.state} to="/courses/perchase">Perchase this course</NavLink>
+                    <NavLink state={location.state} to="/perchase">Perchase this course</NavLink>
                 </button>
             </div>
         </div>

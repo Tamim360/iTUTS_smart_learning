@@ -3,6 +3,7 @@ import { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { ThemeContext } from "../../contexts/ThemeProvider";
 import { FaCode } from "react-icons/fa";
+import { AuthContext } from "../../contexts/AuthProvider";
 
 const Header = () => {
   const { dark, setDark } = useContext(ThemeContext);
@@ -11,6 +12,13 @@ const Header = () => {
   
   const links = ['home','courses','faq','blogs']
 
+  const { handleSignOut , user } = useContext(AuthContext)
+  
+  const handleLogout = () => {
+    handleSignOut()
+    .then(res => {})
+    .catch(err => console.error(err))
+  }
 
   return (
     <div
@@ -26,11 +34,11 @@ const Header = () => {
       {/* menu */}
       <ul
         
-        className={`menu absolute left-0 ${
+        className={`z-10 menu absolute left-0 ${
           isOpen ? "top-16" : "top-[-250px]"
         } text-center w-screen md:static md:menu-horizontal p-0 duration-150 ${
-          dark ? "text-white" : "text-slate-900"
-        }`}
+          dark ? "text-white bg-[#2A303C]" : "text-slate-900 bg-white"
+        } md:bg-transparent`}
       >
         {
             links.map((link, index) => {
@@ -50,7 +58,7 @@ const Header = () => {
         }
 
         {/* theme toggler */}
-        <label className="swap swap-rotate order-[-1] md:order-1 md:ml-4">
+        <label className="swap swap-rotate order-[-1] md:order-1 md:mx-4">
           <input type="checkbox" />
           <svg
             onClick={() => setDark(!dark)}
@@ -72,68 +80,83 @@ const Header = () => {
         </label>
       </ul>
 
-      <div className="flex-none">
-        <div className="dropdown dropdown-end">
-          <label tabIndex={0} className="btn btn-ghost btn-circle">
-            <div className="indicator">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
+      <div className="conditional">
+        { user && user.uid ?
+          <div className="flex-none">
+            <div className="dropdown dropdown-end">
+              <label tabIndex={0} className="btn btn-ghost btn-circle">
+                <div className="indicator">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-5 w-5"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
+                    />
+                  </svg>
+                  <span className="badge badge-sm indicator-item">8</span>
+                </div>
+              </label>
+              <div
+                tabIndex={0}
+                className="mt-3 card card-compact dropdown-content w-52 bg-base-100 shadow"
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
-                />
-              </svg>
-              <span className="badge badge-sm indicator-item">8</span>
-            </div>
-          </label>
-          <div
-            tabIndex={0}
-            className="mt-3 card card-compact dropdown-content w-52 bg-base-100 shadow"
-          >
-            <div className="card-body">
-              <span className="font-bold text-lg">8 Items</span>
-              <span className="text-info">Subtotal: $999</span>
-              <div className="card-actions">
-                <button className="btn btn-primary btn-block">View cart</button>
+                <div className="card-body">
+                  <span className="font-bold text-lg">8 Items</span>
+                  <span className="text-info">Subtotal: $999</span>
+                  <div className="card-actions">
+                    <NavLink to="/perchase"><button className="btn btn-primary btn-block">View cart</button></NavLink>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-        </div>
-        <div className="dropdown dropdown-end">
-          <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-            <div className="w-10 rounded-full ">
-              <img
-                src="https://placeimg.com/80/80/people"
-                alt="user-profile-pic"
-                title="Tamimul Islam"
-              />
+            <div className="dropdown dropdown-end">
+              <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+                <div className="w-10 rounded-full ">
+                  <img
+                    src={user && user.uid ? user.photoURL : undefined}
+                    alt="user-profile-pic"
+                    title={user?.displayName && user.displayName}
+                  />
+                </div>
+              </label>
+              <ul
+                tabIndex={0}
+                className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
+              >
+                <li>
+                  <Link className="justify-between">
+                    Profile
+                    <span className="badge">New</span>
+                  </Link>
+                </li>
+                <li>
+                  <Link>Settings</Link>
+                </li>
+                <li>
+                  <Link onClick={handleLogout}>Logout</Link>
+                </li>
+              </ul>
             </div>
-          </label>
-          <ul
-            tabIndex={0}
-            className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
-          >
-            <li>
-              <Link className="justify-between">
-                Profile
-                <span className="badge">New</span>
-              </Link>
-            </li>
-            <li>
-              <Link>Settings</Link>
-            </li>
-            <li>
-              <Link>Logout</Link>
-            </li>
-          </ul>
-        </div>
+          </div>
+          : 
+          <>
+            <Link to="/login"
+              className={`uppercase font-bold mr-2 ${dark ? "hover:text-violet-400" : "hover:text-primary"}`}>
+              Login
+            </Link>
+            <Link to="register"
+              className={`uppercase font-bold mr-2 ${dark ? "hover:text-violet-400" : "hover:text-primary"}`}>
+              Register
+            </Link>
+          </>
+        }
       </div>
 
       {/* menuBar */}
