@@ -16,7 +16,7 @@ const Login = () => {
   const handleSignInWithFacebook = () => {
     handleFacebookSignIn()
       .then(res => {
-      navigate(from, {replace: true})
+      navigate(from || '/', {replace: true})
       const user = res.user
       console.log(user);
     })
@@ -26,7 +26,7 @@ const Login = () => {
   const handleSignInWithGoogle = () => {
     handleGoogleSignIn()
     .then(res => {
-      navigate(from, {replace: true})
+      navigate(from || '/', {replace: true})
       const user = res.user
       console.log(user);
     })
@@ -36,7 +36,7 @@ const Login = () => {
   const handleSignInWithGithub = () => {
     handleGithubSignIn()
     .then(res => {
-      navigate(from, {replace: true})
+      navigate(from || '/', {replace: true})
       const user = res.user
       console.log(user);
     })

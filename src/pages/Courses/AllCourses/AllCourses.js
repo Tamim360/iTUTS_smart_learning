@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import { useState } from 'react';
 import { NavLink, Outlet, useLoaderData } from 'react-router-dom';
 import { CategoryContext } from '../../../contexts/CategoryProvider';
+import { ProductContext } from '../../../contexts/ProductProvider';
 
 
 const AllCourses = () => {
@@ -13,6 +14,9 @@ const AllCourses = () => {
     //     setCourses()
     // },[specificCourses])
     // console.log(specificCourses, 'All courses');
+
+    const {handleProducts} = useContext(ProductContext)
+
     return (
         <div className="p-8 grow">
             <h2>all courses {specificCourses.length}</h2>
@@ -39,7 +43,7 @@ const AllCourses = () => {
                                 <button className="bg-violet-700 hover:bg-violet-600 text-white rounded-lg font-semibold px-3 py-1">
                                     <NavLink state={course} to={`/courses/${courseName.split(' ').join('-').toLowerCase()}`}>See Details</NavLink>
                                 </button>
-                                <button className="bg-violet-700 hover:bg-violet-600 text-white rounded-lg font-semibold px-3 py-1">Add to Cart</button>
+                                <button onClick={() => handleProducts(course)} className="bg-violet-700 hover:bg-violet-600 text-white rounded-lg font-semibold px-3 py-1">Add to Cart</button>
                                 </div>
                             </div>
                             </div>

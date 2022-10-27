@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import {FaAngleLeft} from "react-icons/fa";
 import { Link, Navigate, NavLink, useLocation, useNavigate } from 'react-router-dom';
+import { ProductContext } from '../../../contexts/ProductProvider';
 
 const CourseDetails = () => {
     const navigate = useNavigate()
     const location = useLocation()
-    const {author, video, category, courseName, description} = location.state
+    const { author, video, category, courseName, description } = location.state
+    const {handleProducts} = useContext(ProductContext)
     // console.log(description);
     return (
         <div className="w-full">
@@ -23,7 +25,7 @@ const CourseDetails = () => {
                 </div>
                 <p className="my-3 font-semibold">{description}</p>
                 <button className="btn btn-primary my-4 mx-auto block">
-                    <NavLink state={location.state} to="/perchase">Perchase this course</NavLink>
+                    <NavLink onClick={() => handleProducts(location.state)} to="/perchase">Perchase this course</NavLink>
                 </button>
             </div>
         </div>

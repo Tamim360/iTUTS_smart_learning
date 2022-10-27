@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import ThemeProvider from './contexts/ThemeProvider';
 import { CategoryProvider } from './contexts/CategoryProvider';
 import AuthProvider from './contexts/AuthProvider';
+import ProductProvider from './contexts/ProductProvider';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -13,7 +14,9 @@ root.render(
     <ThemeProvider>
       <CategoryProvider>
         <AuthProvider>
-          <App />
+          <ProductProvider>
+            <App />
+          </ProductProvider>
         </AuthProvider>
       </CategoryProvider>
     </ThemeProvider>
