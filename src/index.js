@@ -1,14 +1,14 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-import ThemeProvider from './contexts/ThemeProvider';
-import { CategoryProvider } from './contexts/CategoryProvider';
-import AuthProvider from './contexts/AuthProvider';
-import ProductProvider from './contexts/ProductProvider';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+import ThemeProvider from "./contexts/ThemeProvider";
+import { CategoryProvider } from "./contexts/CategoryProvider";
+import AuthProvider from "./contexts/AuthProvider";
+import ProductProvider from "./contexts/ProductProvider";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <ThemeProvider>

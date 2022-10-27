@@ -3,61 +3,64 @@ import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { FaFacebook, FaGithub, FaGoogle } from "react-icons/fa";
 import { AuthContext } from "../../../contexts/AuthProvider";
 
-
 const Login = () => {
-  const { handleFacebookSignIn, handleGoogleSignIn, handleGithubSignIn, signIn } = useContext(AuthContext)
+  const {
+    handleFacebookSignIn,
+    handleGoogleSignIn,
+    handleGithubSignIn,
+    signIn,
+  } = useContext(AuthContext);
   // console.log(handleFacebookSignIn);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
-  const location = useLocation()
-  const from = location?.state?.from?.pathname
+  const location = useLocation();
+  const from = location?.state?.from?.pathname;
 
   const handleSignInWithFacebook = () => {
     handleFacebookSignIn()
-      .then(res => {
-      navigate(from || '/', {replace: true})
-      const user = res.user
-      console.log(user);
-    })
-    .catch(err => console.error(err))
-  }
+      .then((res) => {
+        navigate(from || "/", { replace: true });
+        const user = res.user;
+        console.log(user);
+      })
+      .catch((err) => console.error(err));
+  };
 
   const handleSignInWithGoogle = () => {
     handleGoogleSignIn()
-    .then(res => {
-      navigate(from || '/', {replace: true})
-      const user = res.user
-      console.log(user);
-    })
-    .catch(err => console.error(err))
-  }
+      .then((res) => {
+        navigate(from || "/", { replace: true });
+        const user = res.user;
+        console.log(user);
+      })
+      .catch((err) => console.error(err));
+  };
 
   const handleSignInWithGithub = () => {
     handleGithubSignIn()
-    .then(res => {
-      navigate(from || '/', {replace: true})
-      const user = res.user
-      console.log(user);
-    })
-    .catch(err => console.error(err))
-  }
+      .then((res) => {
+        navigate(from || "/", { replace: true });
+        const user = res.user;
+        console.log(user);
+      })
+      .catch((err) => console.error(err));
+  };
 
   const handleSubmit = (e) => {
-    e.preventDefault()
-    const form = e.target
-    const email = form.email.value
-    const password = form.password.value
+    e.preventDefault();
+    const form = e.target;
+    const email = form.email.value;
+    const password = form.password.value;
     signIn(email, password)
-    .then(res => {
-      form.reset()
-      navigate(from || '/', {replace: true})
-      const user = res.user
-      console.log(user);
-    })
-    .catch(err => console.error(err))
-
-  }
+      .then((res) => {
+        form.reset();
+        navigate(from || "/", { replace: true });
+        const user = res.user;
+        console.log(user);
+      })
+      .catch((err) => console.error(err));
+  };
 
   return (
     <div className="hero">
@@ -92,7 +95,10 @@ const Login = () => {
                 <NavLink className="label-text-alt link link-hover">
                   Forgot password?
                 </NavLink>
-                <NavLink to="/register" className="label-text-alt link link-hover">
+                <NavLink
+                  to="/register"
+                  className="label-text-alt link link-hover"
+                >
                   New? Register.
                 </NavLink>
               </label>
@@ -100,13 +106,21 @@ const Login = () => {
             <div className="text-center">
               <p className="label-text-alt">---or login with---</p>
               <div className="flex justify-center gap-2 mt-2 items-center">
-                <NavLink onClick={handleSignInWithFacebook}><FaFacebook/></NavLink>
-                <NavLink onClick={handleSignInWithGoogle}><FaGoogle/></NavLink>
-                <NavLink onClick={handleSignInWithGithub}><FaGithub/></NavLink>
+                <NavLink onClick={handleSignInWithFacebook}>
+                  <FaFacebook />
+                </NavLink>
+                <NavLink onClick={handleSignInWithGoogle}>
+                  <FaGoogle />
+                </NavLink>
+                <NavLink onClick={handleSignInWithGithub}>
+                  <FaGithub />
+                </NavLink>
               </div>
             </div>
             <div className="form-control mt-6">
-              <button type="submit" className="btn btn-primary">Login</button>
+              <button type="submit" className="btn btn-primary">
+                Login
+              </button>
             </div>
           </form>
         </div>
