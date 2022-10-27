@@ -4,7 +4,7 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthProvider';
 
 const Register = () => {
-  const { handleFacebookSignIn, handleGoogleSignIn, handleGithubSignIn } = useContext(AuthContext)
+  const { handleFacebookSignIn, handleGoogleSignIn, handleGithubSignIn , createUser, updateNameAndPhoto} = useContext(AuthContext)
   // console.log(handleFacebookSignIn);
 
   const navigate = useNavigate()
@@ -39,9 +39,34 @@ const Register = () => {
     .catch(err => console.error(err))
   }
 
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    const form = e.target
+    const name = form.name.value
+    const photo = form.photo.value
+    const email = form.email.value
+    const password = form.password.value
+    createUser(email, password)
+    .then(res => {
+      form.reset()
+      navigate('/')
+      const user = res.user
+      console.log(user);
+
+    updateNameAndPhoto(name, photo)
+    .then(res => {})
+    .catch(err => console.error(err))
+    
+    })
+    .catch(err => console.error(err))
+    
+    
+
+  }
+
     return (
         <div className="hero">
-      <form className="hero-content flex-col mt-8">
+      <form className="hero-content flex-col mt-8" onSubmit={(e) => handleSubmit(e)}>
         <div className="text-center lg:text-left">
           <h1 className="text-5xl font-bold">Please Register</h1>
         </div>
@@ -55,6 +80,18 @@ const Register = () => {
                 type="text"
                 placeholder="Full name"
                 className="input input-bordered"
+                name="name"
+              />
+            </div>
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text">Photo URL</span>
+              </label>
+              <input
+                type="text"
+                placeholder="Photo URL"
+                className="input input-bordered"
+                name="photo"
               />
             </div>
             <div className="form-control">
@@ -62,9 +99,10 @@ const Register = () => {
                 <span className="label-text">Email</span>
               </label>
               <input
-                type="text"
+                type="email"
                 placeholder="email"
                 className="input input-bordered"
+                name="email"
               />
             </div>
             <div className="form-control">
@@ -72,9 +110,10 @@ const Register = () => {
                 <span className="label-text">Password</span>
               </label>
               <input
-                type="text"
+                type="password"
                 placeholder="password"
                 className="input input-bordered"
+                name="password"
               />
               <label className="label">
                 <p className="label-text-alt">Allrady have an account? 
@@ -93,7 +132,7 @@ const Register = () => {
               </div>
             </div>
             <div className="form-control mt-6">
-              <button className="btn btn-primary">Register</button>
+              <button type="submit" className="btn btn-primary">Register</button>
             </div>
             
           </div>

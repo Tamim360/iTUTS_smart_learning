@@ -12,7 +12,7 @@ export const CategoryProvider = ({ children}) => {
     }
 
     useEffect(() => {
-        fetch(`http://localhost:5000/courses/${category.toLowerCase()}`)
+        fetch(`https://smart-learning-360.vercel.app/courses/${category.toLowerCase()}`)
         .then(res => res.json())
         .then(data => {
             // console.log(data);

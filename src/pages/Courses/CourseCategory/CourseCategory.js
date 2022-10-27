@@ -3,6 +3,9 @@ import { Link, NavLink } from "react-router-dom";
 import { FaCode , FaAngleRight} from "react-icons/fa";
 import js from '../../../assets/js.png'
 import node from '../../../assets/nodejs.png'
+import react from '../../../assets/react.png'
+import typescript from '../../../assets/typescript.png'
+import redux from '../../../assets/redux.png'
 import { CategoryContext } from "../../../contexts/CategoryProvider";
 
 const CourseCategory = () => {
@@ -16,6 +19,18 @@ const CourseCategory = () => {
     {
       name: 'NodeJS',
       src: node
+    },
+    {
+      name: 'ReactJS',
+      src: react
+    },
+    {
+      name: 'TypeScript',
+      src: typescript
+    },
+    {
+      name: 'Redux',
+      src: redux
     }
   ]
   return (

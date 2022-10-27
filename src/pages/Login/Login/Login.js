@@ -5,7 +5,7 @@ import { AuthContext } from "../../../contexts/AuthProvider";
 
 
 const Login = () => {
-  const { handleFacebookSignIn, handleGoogleSignIn, handleGithubSignIn } = useContext(AuthContext)
+  const { handleFacebookSignIn, handleGoogleSignIn, handleGithubSignIn, signIn } = useContext(AuthContext)
   // console.log(handleFacebookSignIn);
 
   const navigate = useNavigate()
@@ -43,6 +43,22 @@ const Login = () => {
     .catch(err => console.error(err))
   }
 
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    const form = e.target
+    const email = form.email.value
+    const password = form.password.value
+    signIn(email, password)
+    .then(res => {
+      form.reset()
+      navigate(from || '/', {replace: true})
+      const user = res.user
+      console.log(user);
+    })
+    .catch(err => console.error(err))
+
+  }
+
   return (
     <div className="hero">
       <div className="hero-content flex-col mt-8">
@@ -50,15 +66,16 @@ const Login = () => {
           <h1 className="text-5xl font-bold">Please Login</h1>
         </div>
         <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
-          <div className="card-body">
+          <form onSubmit={(e) => handleSubmit(e)} className="card-body">
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Email</span>
               </label>
               <input
-                type="text"
+                type="email"
                 placeholder="email"
                 className="input input-bordered"
+                name="email"
               />
             </div>
             <div className="form-control">
@@ -66,9 +83,10 @@ const Login = () => {
                 <span className="label-text">Password</span>
               </label>
               <input
-                type="text"
+                type="password"
                 placeholder="password"
                 className="input input-bordered"
+                name="password"
               />
               <label className="label">
                 <NavLink className="label-text-alt link link-hover">
@@ -88,9 +106,9 @@ const Login = () => {
               </div>
             </div>
             <div className="form-control mt-6">
-              <button className="btn btn-primary">Login</button>
+              <button type="submit" className="btn btn-primary">Login</button>
             </div>
-          </div>
+          </form>
         </div>
       </div>
     </div>

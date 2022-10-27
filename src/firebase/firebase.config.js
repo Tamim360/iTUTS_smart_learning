@@ -5,12 +5,12 @@ import { initializeApp } from "firebase/app";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyCjztom_4jGMRk9DWDSjCNrjBK2f6l72oQ",
-  authDomain: "smart-learning-67f1d.firebaseapp.com",
-  projectId: "smart-learning-67f1d",
-  storageBucket: "smart-learning-67f1d.appspot.com",
-  messagingSenderId: "396936109282",
-  appId: "1:396936109282:web:7a3e025e36bb64b4d092bb"
+  apiKey: process.env.REACT_APP_apiKey,
+  authDomain: process.env.REACT_APP_authDomain,
+  projectId: process.env.REACT_APP_projectId,
+  storageBucket: process.env.REACT_APP_storageBucket,
+  messagingSenderId: process.env.REACT_APP_messagingSenderId,
+  appId: process.env.REACT_APP_appId
 };
 
 // Initialize Firebase
